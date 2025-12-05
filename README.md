@@ -18,6 +18,8 @@ A modern, real-time chat application built with **Spring Boot** and **WebSocket 
 - ⌨️ **Enter key to send** messages
 - 🔄 **Auto-reconnect** on connection drop
 
+> ⚠️ **Note**: This app currently has **no database**. Messages are not stored and will be cleared on page refresh. This is intentional for the MVP version. Database integration is planned as a future improvement.
+
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
