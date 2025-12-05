@@ -70,15 +70,7 @@ docker build -t chat-app .
 docker run -p 8080:8080 chat-app
 ```
 
-## ☁️ Deploy to Render
 
-1. Push code to GitHub
-2. Create a new **Web Service** on [Render](https://render.com)
-3. Connect your GitHub repository
-4. Configure:
-   - **Environment**: Docker
-   - **Port**: 8080
-5. Deploy!
 
 ## 📁 Project Structure
 
