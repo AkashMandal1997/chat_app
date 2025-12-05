@@ -389,7 +389,7 @@
         <div class="chat-input-section">
             <div class="input-wrapper">
                 <input id="messageInput" type="text" placeholder="Type a message..." />
-                <button id="sendMessage" class="send-btn" disabled>
+                <button id="sendMessage" class="send-btn">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
@@ -400,14 +400,14 @@
         var stompClient = null;
         var currentUser = 'Anonymous';
         var isFirstMessage = true;
+        var isConnected = false;
 
         function setConnected(connected) {
-            var btn = document.getElementById('sendMessage');
+            isConnected = connected;
             var statusDot = document.getElementById('statusDot');
             var userStatusDot = document.getElementById('userStatusDot');
             var statusText = document.getElementById('statusText');
 
-            if (btn) btn.disabled = !connected;
 
             if (connected) {
                 statusDot.classList.add('online');
@@ -515,7 +515,12 @@
             var sender = senderInput ? senderInput.value.trim() : '';
             var content = messageInput ? messageInput.value.trim() : '';
 
-            if (!stompClient || !content) return;
+            if (!content) return;
+
+            if (!stompClient || !isConnected) {
+                alert('Not connected to chat server. Please wait or refresh the page.');
+                return;
+            }
 
             var chatMessage = { sender: sender || 'Anonymous', content: content };
             stompClient.send('/app/sendMessage', {}, JSON.stringify(chatMessage));
@@ -533,7 +538,7 @@
             // Send message on Enter key
             if (messageInput) {
                 messageInput.addEventListener('keypress', function (e) {
-                    if (e.key === 'Enter' && !sendBtn.disabled) {
+                    if (e.key === 'Enter') {
                         sendMessage();
                     }
                 });
